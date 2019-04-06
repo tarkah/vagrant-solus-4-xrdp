@@ -20,6 +20,7 @@ Vagrant.configure(2) do |config|
   config.vm.provision "file", source: "./share", destination: "/home/vagrant/share"
 
   config.vm.provision "shell", privileged: "true", inline: <<-SHELL
+    echo "allowed_users=anybody" > /etc/X11/Xwrapper.config
     eopkg it -y /home/vagrant/share/xrdp-*.eopkg /home/vagrant/share/xorgxrdp-*.eopkg
     systemctl enable xrdp
     systemctl start xrdp
